@@ -16,6 +16,10 @@ names = model.names
 app = Flask(__name__)
 CORS(app) 
 
+@app.route('/')
+def home():
+    return "Hello, World!"
+
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'image' not in request.files:
@@ -58,6 +62,10 @@ def predict():
     # img_io.seek(0)
 
     # return send_file(img_io, mimetype='image/jpeg')
+
+@app.route('/<path:subpath>')
+def catch_all(subpath):
+    return "Hello, World!"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
